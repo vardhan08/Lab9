@@ -67,6 +67,86 @@
 
     let errorBtns = Array.from(document.querySelectorAll('#error-btns > button'));
     // TODO - Make buttons functional
+
+    // first button
+    errorBtns[0].addEventListener('click', function() {
+      console.log("Console Log Demo:");
+      console.log("The first number is ${document.querySelector('#first-num').value}");
+      console.log("The second number is ${document.querySelector('#second-num').value}");
+      console.log("The operator: " + document.querySelector('#operator').value);
+    });
+
+    // second button
+    errorBtns[1].addEventListener('click', () => {
+      console.error('Console Error Demo:');
+    });
+
+    // third button
+    errorBtns[2].addEventListener('click', () => {
+      console.log('Console Dir:');
+      console.dir(errorBtns[2]);
+    });
+
+    // fourth button
+    errorBtns[3].addEventListener('click', () => {
+      console.log('Console Dirxml:');
+      console.dirxml(document);
+    });
+
+    // fifth button
+    errorBtns[4].addEventListener('click', ()  => {
+      console.log("Console Group Start:");
+      console.group();
+      console.log("Log 1");
+      console.log("Log 2");
+    });
+
+    // sixth button
+    errorBtns[5].addEventListener('click', () => {
+      console.log("Console Group End:");
+      console.groupEnd();
+      console.log("Group no longer exists");
+    });
+
+    // seventh button
+    errorBtns[6].addEventListener('click', () => {
+      console.log("Console table:");
+      function inputs(input1, input2) {
+        this.input1 = input1;
+        this.input2 = input2;
+      }
+      console.table(new inputs(document.querySelector('#first-num').value, document.querySelector('#second-num').value));
+    });
+
+    // eighth button
+    errorBtns[7].addEventListener('click', () => {
+      console.log("Start Timer:");
+      console.time('My timer');
+      console.log("Timer begins now...");
+    });
+
+    // ninth button
+    errorBtns[8].addEventListener('click', () => {
+      console.log('End Timer');
+      console.timeEnd('timer');
+      console.log("Timer ended...");
+    });
+
+    // tenth button
+    errorBtns[9].addEventListener('click', () => {
+      let function1 = () =>  { function2(); };
+      let function2 = () =>  { function3(); };
+      let function3 = () =>  { function4(); };
+      let function4 = () =>  { function5(); };
+      let function5 = () =>  { console.log("Why do I exist?"); console.trace(); };
+      function1();
+    });
+
+    // eleventh button
+    errorBtns[10].addEventListener('click', () => {
+      console.log("Trigger a Global Error");
+      //TODO
+    });
   </script>
 </body>
 </html>
