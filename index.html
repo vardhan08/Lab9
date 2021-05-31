@@ -55,14 +55,38 @@
     <button>Trigger a Global Error</button>
   </section>
 
+  <script src="https://cdn.trackjs.com/agent/v3/latest/t.js"></script>
+  <script>
+  window.TrackJS && TrackJS.install({ 
+    token: "07ce909bf41541298803235d64cd2995"
+    // for more configuration options, see https://docs.trackjs.com
+  });
+  </script>
+                        
   <script>
     let calculateBtn = document.querySelector('#calculate');
+    var secondNum = document.querySelector('#second-num').value;
+    var operator = document.querySelector('#operator').value;
     calculateBtn.addEventListener('click', () => {
-      let output = document.querySelector('output');
-      let firstNum = document.querySelector('#first-num').value;
-      let secondNum = document.querySelector('#second-num').value;
-      let operator = document.querySelector('#operator').value;
+      var output = document.querySelector('output');
+      var firstNum = document.querySelector('#first-num').value;
+      secondNum = document.querySelector('#second-num').value;
+      operator = document.querySelector('#operator').value;
       output.innerHTML = eval(`${firstNum} ${operator} ${secondNum}`);
+      // TrackJS.track('Testing TrackJS!');
+
+    try{
+      console.log("I tried");
+      if (secondNum == 0 && operator == "/") {
+        throw new EvalError();
+      }
+    }
+    catch(error){
+      console.log("Eval Error: Cannot Divide by Zero");
+    }
+    finally {
+      console.log("Denominator is fine!!!")
+    }
     });
 
     let errorBtns = Array.from(document.querySelectorAll('#error-btns > button'));
@@ -142,11 +166,18 @@
       function1();
     });
 
+
+    window.onerror = function(msg, url, lineNo, columnNo, error) {
+      console.error(msg);
+      return false;
+    }
+
     // eleventh button
     errorBtns[10].addEventListener('click', () => {
       console.log("Trigger a Global Error");
-      //TODO
+      throw new TypeError("Wrong type");
     });
+
   </script>
 </body>
 </html>
